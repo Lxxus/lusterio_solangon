@@ -108,11 +108,37 @@ $topSellingProducts = $conn->query($topSellingQuery);
             justify-content: space-between;
             flex-grow: 1;
         }
-
         .product-list .card-box {
-            flex: 1 1 calc(33.33% - 10px); /* Ensures 3 products fit evenly */
-            max-width: 32%;
-        }
+        flex: 1 1 calc(33.33% - 10px); /* Ensures 3 products fit evenly */
+        max-width: 32%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 20px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
+        background: white;
+        margin-bottom: 20px;
+    }
+
+    .product-list .card-box h5 {
+        margin-bottom: 10px;
+    }
+
+    .product-list .card-box p {
+        margin: 5px 0;
+    }
+
+    .product-list .card-box .btn {
+        margin-top: auto;
+        background-color: #735240;
+        color: white;
+        border: none;
+    }
+
+    .product-list .card-box .btn:hover {
+        background-color: #5a3d2f;
+    }
         a {
             text-decoration: none !important;
             color: inherit;
@@ -157,7 +183,7 @@ $topSellingProducts = $conn->query($topSellingQuery);
     </div>
 
     <!-- Recent Activity & Top Selling Products -->
-<div class="equal-height-container">
+    <div class="equal-height-container">
     <!-- Recent Activity -->
     <div class="table-container">
         <h4 class="fw-bold">Recent Activity</h4>
@@ -173,7 +199,7 @@ $topSellingProducts = $conn->query($topSellingQuery);
         <h4 class="fw-bold">Top Selling Products</h4>
         <div class="product-list">
             <?php while ($product = $topSellingProducts->fetch_assoc()) : ?>
-                <div class="card card-box text-center p-3">
+                <div class="card card-box text-center">
                     <h5><?= $product['product_name']; ?></h5>
                     <p>₱<?= number_format($product['price'], 2); ?></p>
                     <p class="text-muted">Stock: <?= $product['stock_quantity']; ?></p>
@@ -184,27 +210,24 @@ $topSellingProducts = $conn->query($topSellingQuery);
     </div>
 </div>
 
-
-    <!-- Featured Products -->
-    <div class="row mt-4">
-        <div class="col-lg-12">
-            <div class="table-container">
-                <h4 class="fw-bold">Featured Products</h4>
-                <div class="row">
-                    <?php while ($product = $featuredProducts->fetch_assoc()) : ?>
-                        <div class="col-md-4">
-                            <div class="card card-box text-center mb-4">
-                                <h5><?= $product['product_name']; ?></h5>
-                                <p>₱<?= number_format($product['price'], 2); ?></p>
-                                <p class="text-muted">Stock: <?= $product['stock_quantity']; ?></p>
-                                <button class="btn btn-sm btn-dark">View Details</button>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                </div>
+<!-- Featured Products -->
+<div class="row mt-4">
+    <div class="col-lg-12">
+        <div class="table-container">
+            <h4 class="fw-bold">Featured Products</h4>
+            <div class="product-list">
+                <?php while ($product = $featuredProducts->fetch_assoc()) : ?>
+                    <div class="card card-box text-center">
+                        <h5><?= $product['product_name']; ?></h5>
+                        <p>₱<?= number_format($product['price'], 2); ?></p>
+                        <p class="text-muted">Stock: <?= $product['stock_quantity']; ?></p>
+                        <button class="btn btn-sm btn-dark">View Details</button>
+                    </div>
+                <?php endwhile; ?>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Stock Summary Chart -->
     <div class="row mt-4">

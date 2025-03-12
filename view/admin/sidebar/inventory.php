@@ -59,6 +59,21 @@ $result = $conn->query("SELECT * FROM products");
         .table tbody tr:hover {
             background: #FDF8F3;
         }
+        .action-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .action-buttons .btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 40px;
+        height:55px;
+        padding: 0;
+    }
         a {
             text-decoration: none !important;
             color: inherit;
@@ -92,25 +107,25 @@ $result = $conn->query("SELECT * FROM products");
         </thead>
             </thead>
             <tbody id="productTableBody">
-                <?php while ($row = $result->fetch_assoc()): ?>
-                    <tr id="row-<?= $row['id']; ?>">
-                        <td><?= $row['id']; ?></td>
-                        <td><?= $row['product_name']; ?></td>
-                        <td><?= $row['product_description']; ?></td>
-                        <td>₱<?= number_format($row['price'], 2); ?></td>
-                        <td><?= $row['stock_quantity']; ?></td>
-                        <td><?= $row['size']; ?></td>
-                        <td>
-                            <button class="btn edit-btn" data-id="<?= $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#editProductModal" style="background-color: #5A3D2B; color: white; border: none;">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn delete-btn" data-id="<?= $row['id']; ?>" style="background-color: #D9534F; color: white; border: none;">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
+    <?php while ($row = $result->fetch_assoc()): ?>
+        <tr id="row-<?= $row['id']; ?>">
+            <td><?= $row['id']; ?></td>
+            <td><?= $row['product_name']; ?></td>
+            <td><?= $row['product_description']; ?></td>
+            <td>₱<?= number_format($row['price'], 2); ?></td>
+            <td><?= $row['stock_quantity']; ?></td>
+            <td><?= $row['size']; ?></td>
+            <td class="action-buttons">
+                <button class="btn edit-btn" data-id="<?= $row['id']; ?>" data-bs-toggle="modal" data-bs-target="#editProductModal" style="background-color: #5A3D2B; color: white; border: none;">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn delete-btn" data-id="<?= $row['id']; ?>" style="background-color: #D9534F; color: white; border: none;">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </td>
+        </tr>
+    <?php endwhile; ?>
+</tbody>
         </table>
     </div>
 </div>
